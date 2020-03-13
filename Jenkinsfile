@@ -20,19 +20,19 @@ pipeline{
                 sh 'sudo yum update -y'
             }
         }    
-        stage('To install docker dependencies on agent'){
-            steps{
-                sh 'sudo yum install -y yum-utils device-mapper-persistent-data lvm2'
-            }
-        }    
-        stage('Add docker repository to the agent'){
-            steps{
-    sh 'sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo'
-            }
-        }
         stage('To install docker on agent'){
             steps{
-                sh 'sudo yum install docker -y'
+                sh 'sudo yum install -y docker'
+            }
+        }
+        stage('To start docker'){
+            steps{
+                sh 'sudo service docker start'
+            }
+        }
+        stage('to check docker status'){
+            steps{
+                sh 'sudo service docker status'
             }
         }
     }
